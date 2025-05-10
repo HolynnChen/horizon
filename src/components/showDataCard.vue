@@ -63,11 +63,11 @@ const props = defineProps<{
 
 const translate1 = (num: number) => {
   switch (num) {
-    case 0:
-      return 'R'
     case 1:
-      return 'SR'
+      return 'R'
     case 2:
+      return 'SR'
+    case 3:
       return '珍藏'
   }
   return '未知'
