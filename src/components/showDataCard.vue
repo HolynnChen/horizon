@@ -29,12 +29,12 @@
       <div>{{ props.data.收藏品阶段 < 0 ? '未持有' : `${translate1(props.data.收藏品阶段)}-${props.data.收藏品等级}` }}</div>
       </div>
       <div class="block">
-        <div>优越</div>
-        <div>{{ props.data.优越 }}</div>
+        <div>装弹</div>
+        <div>{{ props.data.装弹 }}</div>
       </div>
       <div class="block">
-        <div>优越</div>
-        <div>{{ props.data.优越 }}</div>
+        <div>爆裂</div>
+        <div>{{ props.data.爆裂技能等级 }}</div>
       </div>
     </div>
     <div class="empty" v-else>

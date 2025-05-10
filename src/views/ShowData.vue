@@ -11,10 +11,15 @@
             </el-select>
         </div>
         <div class="dataContainer" style="margin-top: 20px;width: 100%;">
-            <el-table :data="Object.entries(showData.data).map(([k, v]) => ({ username: k, nikkes: v }))" height="calc(100vh - 150px)">
+            <el-table :data="Object.entries(showData.data).map(([k, v]) => ({ username: k, nikkes: v }))"
+                height="calc(100vh - 150px)">
                 <el-table-column fixed>
                     <template #header>
-                        <span class="baseHeader">{{ (new Date(showData.update_time)).toLocaleDateString() }}</span>
+                        <div class="baseHeader"
+                            style="padding:0;font-size: 12px;line-height: 12px; flex-direction: column;align-items: center;">
+                            <span>{{ dayjs(showData.update_time).format("YYYY-MM-DD") }}</span>
+                            <span>{{ dayjs(showData.update_time).format("HH:mm:ss") }}</span>
+                        </div>
                     </template>
                     <el-table-column prop="username" width="120px">
                         <template #header>
@@ -47,6 +52,7 @@
 import { computed, onMounted, ref, unref } from 'vue'
 import { tradToSimple } from 'simptrad'
 import showDataCard from '@/components/showDataCard.vue'
+import dayjs from 'dayjs'
 
 type DataWraper = {
     update_time: number,
@@ -147,10 +153,11 @@ onMounted(() => {
 }
 
 .dataContainer {
-    &:deep(.el-table){
+    &:deep(.el-table) {
         --el-table-row-hover-bg-color: #fff;
         position: relative;
     }
+
     &:deep(.el-table__header>.is-group>tr>th.el-table__cell) {
         padding: 0 !important;
         border: 0.5px solid #000;
@@ -161,6 +168,7 @@ onMounted(() => {
             padding: 0;
         }
     }
+
     &:deep(.el-table__body>tbody>tr>td) {
         padding: 0 !important;
         border: 0.5px solid #000;
