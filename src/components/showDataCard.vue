@@ -14,7 +14,7 @@
     </div>
     <div class="block">
       <div>突破数</div>
-      <div>{{ props.data.突破数 }}</div>
+      <div>{{ translate2(props.data.突破数) }}</div>
     </div>
     <div class="block">
       <div>攻击</div>
@@ -26,7 +26,7 @@
     </div>
     <div class="block">
       <div>收藏品</div>
-      <div>{{ props.data.收藏品阶段 < 0 ? '未持有' : `${translate1(props.data.收藏品阶段)}-${props.data.收藏品等级}` }}</div>
+      <div>{{ props.data.收藏品阶段 < 0 ? '未持有' : translate1(props.data.收藏品阶段, props.data.收藏品等级) }}</div>
       </div>
       <div class="block">
         <div>装弹</div>
@@ -43,6 +43,8 @@
 </template>
 
 <script lang="ts" setup>
+import { sw } from 'element-plus/es/locales.mjs';
+
 
 type NikkeData = {
   优越: number,
@@ -61,16 +63,26 @@ const props = defineProps<{
   data: NikkeData | null
 }>()
 
-const translate1 = (num: number) => {
+const translate1 = (num: number, num2: number) => {
   switch (num) {
     case 1:
-      return 'R'
+      return `R-${num2}`
     case 2:
-      return 'SR'
+      return `SR-${num2}`
     case 3:
-      return '珍藏'
+      return `珍藏-${num2 + 1}`
   }
   return '未知'
+}
+
+const translate2 = (num: number) => {
+  if (num < 4) {
+    return '☆'.repeat(3 - num) + '★'.repeat(num)
+  }
+  if (num === 10) {
+    return 'MAX'
+  }
+  return '+' + (num - 3)
 }
 
 </script>
